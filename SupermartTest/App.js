@@ -7,6 +7,7 @@ import {
   StatusBar,
   StyleSheet,
   TouchableOpacity,
+  FlatList,
   Image,
   View,
   Dimensions,
@@ -41,12 +42,34 @@ export default () => {
     <FlatList 
       data={DATA}
       keyExtractor={item => item.key}
-      renderItem={({Item, index}) => {
-        return <View>
+      contentContainerStyle={{ padding: SPACING, paddingTop: StatusBar.currentHeight || 42 }}
+      renderItem={({item, index}) => {
+        return <View style={{
+          flexDirection: 'row', 
+          padding: SPACING, 
+          marginBottom: SPACING, 
+          backgroundColor: 'rgba(255, 255, 255, 0.9)', 
+          borderRadius: 12, 
+          shadowColor: "#000",
+          shadowOffset: {
+            width: 0,
+            height: 10,
+          },
+          shadowOpacity: 1,
+          shadowRadius: 20
+        }}>
+
           <Image 
             source={{uri: item.image}}
-            style={{width: AVATAR_SIZE, height: AVATAR_SIZE, }}
+            style={{width: AVATAR_SIZE, height: AVATAR_SIZE, borderRadius: AVATAR_SIZE, marginRight: SPACING / 2 }}
           />
+
+          <View>
+            <Text style={{ fontSize: 22, fontWeight: '700'}}>{item.name}</Text>
+            <Text style={{ fontSize: 13, opacity: 0.7}}>{item.jobTitle}</Text>
+            <Text style={{ fontSize: 14, opacity: 0.8, color: '#0099cc'}}>{item.email}</Text>
+          </View>
+
         </View>
       }}
     />
